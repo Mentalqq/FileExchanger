@@ -1,0 +1,77 @@
+﻿@model FinalTaskTry5.ViewModel.ChangeFolderNameViewModel
+@{
+    ViewBag.Title = "Изменить имя папки";
+}
+<style>
+    .row {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .col-md-8 {
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+        margin-right: 200px;
+    }
+
+    .col-md-2 {
+        width: auto;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Главная", "Disk", "User", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="menu">
+        @Html.ActionLink("Мои Файлы", "Disk", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Пользователи", "ControlMenu", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Уведомления", "GetRequestAccessMessages", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Список запросов", "ListOfMyRequest", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Корзина", "Trash", "User", new { area = "" }, new { @class = "Trash-open" })
+    </div>
+    <div class="content-block">
+        <div class="row">
+            <div class="col-md-8">
+                @using (Html.BeginForm("ChangeFolderName", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <h2>@ViewBag.Title.</h2>
+                    @Html.AntiForgeryToken()
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NewFolderName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.NewFolderName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.NewFolderName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Изменить имя" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

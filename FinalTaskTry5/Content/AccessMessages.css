@@ -1,0 +1,22 @@
+﻿.mainbody {
+    width: 100%;
+    height: 608px;
+    display: flex;
+    justify-content: center;
+}
+.messagesbody {
+    border: 2px solid green;
+    margin-top: 10px;
+    width: 90%;
+    height: 600px;
+    border-radius: 20px;
+}
+.textbody {
+    width: 99%;
+    height: 90%;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-left: 8px;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}

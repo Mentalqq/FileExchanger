@@ -1,0 +1,15 @@
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\FinalTaskTry5.DAL.dll.config
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\FinalTaskTry5.DAL.dll
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\FinalTaskTry5.DAL.pdb
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\EntityFramework.dll
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\EntityFramework.SqlServer.dll
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\Microsoft.AspNet.Identity.Core.dll
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\EntityFramework.xml
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\EntityFramework.SqlServer.xml
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\Microsoft.AspNet.Identity.Core.xml
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\obj\Release\FinalTaskTry5.DAL.csproj.CoreCompileInputs.cache
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\obj\Release\FinalTaskTry5.DAL.csproj.CopyComplete
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\obj\Release\FinalTaskTry5.DAL.dll
+D:\MOOOOEEEEE\GitProjects\finaltask\FinalTaskTry5.DAL\obj\Release\FinalTaskTry5.DAL.pdb

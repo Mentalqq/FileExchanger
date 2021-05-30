@@ -1,0 +1,83 @@
+﻿@model FinalTaskTry5.ViewModel.AllFilesViewModel
+    @{ 
+        int count = 0;
+    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+<style>
+    .textj {
+        font-size: 20px;
+    }
+
+    .display-flex {
+        display: flex;
+        margin-left: 350px;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Главная", "Disk", "User", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Список людей", "ControlMenu", "User", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Уведомления", "GetRequestAccessMessages", "User", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("FindFile", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="display-flex">
+        <span class="textj">Поиск файла:</span>
+        @Html.TextBoxFor(m => m.FileName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FileName, "", new { @class = "text-danger" })
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    </div>
+
+}
+<div class="mainbody">
+    <div class="messagesbody">
+        <div class="textbody">
+            @foreach (var item in Model.Files)
+            {
+                count = 0;
+                foreach (var file in item.Files)
+                {
+                    if (file.FileName == Model.FileName)
+                    {
+                        count++;
+                    }
+                }
+                if (count != 0)
+                {
+                    if (@item.Id != Model.CurrenId)
+                    {
+                    @item.Email
+                    <ul>
+                        @foreach (var file in item.Files)
+                        {
+                            if (file.FileName == Model.FileName)
+                            {
+                                <li>
+                                    @file.FileName
+                                    @Html.ActionLink("Запросить доступ", "RequestAccess", "User", new { fileid = file.Id, userid = item.Id }, null)
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <hr />
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>

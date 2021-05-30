@@ -1,0 +1,134 @@
+﻿@model FinalTaskTry5.ViewModel.UserFilesViewModel
+@{
+    ViewBag.Title = "Папка";
+    string access;
+}
+<style>
+    button {
+        display: inline;
+    }
+    .Folder-text {
+        font-size: 24px;
+    }
+    .FolderNameChange {
+        color: #333333;
+        border-radius: 30px 30px 30px 30px;
+        border: 1px solid rgb(118, 118, 118);
+        background-color: #EFEFEF;
+        padding: 8px;
+    }
+        .FolderNameChange:hover, .FolderNameChange:focus {
+            color: #333333;
+            text-decoration: none;
+            background-color: rgb(218, 212, 212);
+        }
+    .accessfalse {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 30px;
+        color: lightpink;
+        border: 1px solid rgb(118, 118, 118);
+        padding: 5px;
+        background-color: #EFEFEF;
+        text-decoration: none;
+    }
+
+        .accessfalse:hover, .accessfalse:focus {
+            color: lightpink;
+            text-decoration: none;
+            background-color: rgb(218, 212, 212);
+        }
+
+    .accesstrue {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 30px;
+        color: red;
+        border: 1px solid rgb(118, 118, 118);
+        padding: 5px;
+        background-color: #EFEFEF;
+        text-decoration: none;
+    }
+
+        .accesstrue:hover, .accesstrue:focus {
+            color: red;
+            text-decoration: none;
+            background-color: rgb(218, 212, 212);
+        }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Главная", "Disk", "User", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="menu">
+        <div class="add-block">
+            <div class="add">
+                @using (Html.BeginForm("AddFileInFolder", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="file" name="upload" class="custom-file-input" onchange="this.form.submit()" />
+                }
+            </div>
+        </div>
+        <a class="add-open" href="#">Добавить</a>
+        @Html.ActionLink("Мои Файлы", "Disk", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Пользователи", "ControlMenu", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Уведомления", "GetRequestAccessMessages", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Список запросов", "ListOfMyRequest", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Корзина", "Trash", "User", new { area = "" }, new { @class = "Trash-open" })
+        @*@Html.ActionLink("Ошибки", "Logger", "User", null, new { @class = "loggerLink" })*@
+    </div>
+    <div class="content-block">
+        <span class="Folder-text">@ViewBag.Title : @ViewBag.Folder</span>
+        @Html.ActionLink("Изменить название", "ChangeFolderName", "User", new { area = "" }, new { @class = "FolderNameChange" })
+        <p class="text-success">@ViewBag.StatusMessage</p>
+        <h2>Файлы:</h2>
+        <div class="File-grid">
+            @foreach (var item in Model.User.Files)
+            {
+                if (item.Folder != null && item.Folder.Name == ViewBag.Folder)
+                {
+    <div class="file">
+        @*<button onclick="cop(@item.Id)">Найти файл</button>*@
+        <button onclick="cop(@item.Id)" class="copy_link">Ссылка на файл</button>
+        @if (item.Access is true)
+                        {
+                            access = "Открыт";
+                            @Html.ActionLink($"Доступ:{access}", "ChangeAccessInFolder", "User", new { id = @item.Id }, new { @class = "accesstrue" })
+                        }
+                        else 
+                        {
+                            access = "Закрыт";
+                            @Html.ActionLink($"Доступ:{access}", "ChangeAccessInFolder", "User", new { id = @item.Id }, new { @class = "accessfalse" })
+                        }
+        @*@Html.ActionLink($"Доступ:{access}", "ChangeAccess", "User", new { id = @item.Id }, new { @class = "access" })*@
+        <div class="file-icon">
+            <img src="@FinalTaskTry5.Helpers.FileIconHelper.FileIcon(item.FileName)">
+        </div>
+        <span class="file-text">
+            @item.FileName
+        </span>
+        <div class="bottom-fixed">
+            @Html.ActionLink("Download", "DownloadFile", "User", new { id = @item.Id }, new { @class = "link-button" })
+            @Html.ActionLink("Delete", "DeleteFile", "User", new { id = @item.Id }, new { @class = "link-button" })
+        </div>
+    </div>      }
+}
+        </div>
+    </div>
+</div>

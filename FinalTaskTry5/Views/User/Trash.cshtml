@@ -1,0 +1,67 @@
+﻿@model FinalTaskTry5.ViewModel.UserFilesViewModel
+@{ 
+    string access;
+}
+<style>
+    button{
+        display:inline;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Главная", "Disk", "User", new { area = "" }, new { @class = "navbar-brand" })
+            @*@Html.ActionLink("Список людей", "ControlMenu", "User", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Уведомления", "GetRequestAccessMessages", "User", new { area = "" }, new { @class = "navbar-brand" })*@
+        </div>
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+@*==================================================================================================================*@
+@*==================================================================================================================*@
+<div class="main">
+    <div class="menu">
+        
+        @Html.ActionLink("Мои Файлы", "Disk", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Пользователи", "ControlMenu", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Уведомления", "GetRequestAccessMessages", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Список запросов", "ListOfMyRequest", "User", new { area = "" }, new { @class = "Trash-open" })
+        @Html.ActionLink("Корзина", "Trash", "User", new { area = "" }, new { @class = "Trash-open" })
+        @*@Html.ActionLink("Ошибки", "Logger", "User", null, new { @class = "loggerLink" })*@
+    </div>
+@*==================================================================================================================*@
+@*==================================================================================================================*@
+    <div class="content-block">
+        <p class="text-success">@ViewBag.StatusMessage</p>
+        <h2>Файлы:</h2>
+        <div class="File-grid">
+            @foreach (var item in Model.User.Files)
+            {
+                if (item.Trash == true)
+                {
+                    <div class="file">
+                        <div class="file-icon">
+                            <img src="@FinalTaskTry5.Helpers.FileIconHelper.FileIcon(item.FileName)">
+                        </div>
+                        <span class="file-text">
+                            @item.FileName
+                        </span>
+                        <div class="bottom-fixed">
+                            @Html.ActionLink("Вернуть", "MoveFileInOutTrash", "User", new { id = @item.Id }, new { @class = "link-button" })
+                            @Html.ActionLink("Удалить", "DeleteFile", "User", new { id = @item.Id }, new { @class = "link-button" })
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+

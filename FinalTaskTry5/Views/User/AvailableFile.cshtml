@@ -1,0 +1,17 @@
+﻿@model FinalTaskTry5.ViewModel.AvailableFileViewModel
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        margin-top: 150px;
+    }
+</style>
+<div class="available-file">
+    <div class="file-icon">
+        <img src="@FinalTaskTry5.Helpers.FileIconHelper.FileIcon(Model.AvailableFile.FileName)">
+    </div>
+    <span class="file-text">
+        @Model.AvailableFile.FileName
+        @Html.ActionLink("Download", "DownloadFile", "User", new { id = Model.AvailableFile.Id }, null)
+    </span>
+</div>
